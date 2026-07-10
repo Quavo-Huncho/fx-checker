@@ -1,123 +1,65 @@
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t border-slate-200 bg-white">
+    <footer className="mt-16 border-t border-green-700 bg-green-600 text-white">
       <div className="mx-auto max-w-7xl px-6 py-12">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
           <div>
-            <h3 className="text-xl font-bold text-slate-900">
+            <h3 className="text-xl font-bold">
               FX Checker
             </h3>
 
-            <p className="mt-3 text-sm leading-6 text-slate-600">
-              A modern foreign exchange dashboard
-              built for tracking live currency
-              rates, historical trends, favorites,
-              and conversion history.
+            <p className="mt-3 text-sm text-green-100">
+              Real-time currency conversion,
+              market tracking, exchange-rate
+              history, favorites and conversion
+              logs in one place.
             </p>
           </div>
 
-          {/* Features */}
           <div>
-            <h4 className="font-semibold text-slate-900">
+            <h4 className="font-semibold">
               Features
             </h4>
 
-            <ul className="mt-4 space-y-2 text-sm text-slate-600">
-              <li>Live Currency Conversion</li>
-              <li>Exchange Rate Charts</li>
-              <li>Market Ticker</li>
-              <li>Favorite Currency Pairs</li>
-              <li>Conversion History</li>
+            <ul className="mt-4 space-y-2 text-sm text-green-100">
+              <li>Currency Converter</li>
+              <li>Market Dashboard</li>
+              <li>Rate History Charts</li>
+              <li>Favorites</li>
+              <li>Conversion Logs</li>
             </ul>
           </div>
 
-          {/* Resources */}
           <div>
-            <h4 className="font-semibold text-slate-900">
+            <h4 className="font-semibold">
               Resources
             </h4>
 
-            <ul className="mt-4 space-y-2 text-sm text-slate-600">
-              <li>
-                <a
-                  href="https://frankfurter.dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-600"
-                >
-                  Frankfurter API
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-600"
-                >
-                  Documentation
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-600"
-                >
-                  Exchange Rates
-                </a>
-              </li>
+            <ul className="mt-4 space-y-2 text-sm text-green-100">
+              <li>Frankfurter API</li>
+              <li>Frontend Mentor</li>
+              <li>Documentation</li>
             </ul>
           </div>
 
-          {/* Connect */}
           <div>
-            <h4 className="font-semibold text-slate-900">
-              Connect
+            <h4 className="font-semibold">
+              Built With
             </h4>
 
-            <ul className="mt-4 space-y-2 text-sm text-slate-600">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-600"
-                >
-                  GitHub
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-600"
-                >
-                  Frontend Mentor
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-600"
-                >
-                  Portfolio
-                </a>
-              </li>
+            <ul className="mt-4 space-y-2 text-sm text-green-100">
+              <li>Next.js</li>
+              <li>Tailwind CSS</li>
+              <li>Local Storage</li>
+              <li>Frankfurter API</li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-6 text-sm text-slate-500 md:flex-row">
-          <p>
-            © {new Date().getFullYear()} FX Checker.
-            All rights reserved.
-          </p>
-
-          <p>
-            Built with Next.js, Tailwind CSS &
-            Frankfurter API
-          </p>
+        <div className="mt-10 border-t border-green-700 pt-6 text-center text-sm text-green-100">
+          © {new Date().getFullYear()} FX
+          Checker • Built for the Frontend
+          Mentor Hackathon
         </div>
       </div>
     </footer>

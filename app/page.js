@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import HeroSection from "@/components/home/HeroSection";
 import ConverterCard from "@/components/converter/ConverterCard";
 import FavoritesList from "@/components/favorites/FavoritesList";
 import ConversionHistory from "@/components/history/ConversionHistory";
@@ -30,9 +30,14 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
-      <MarketTicker />
 
-      <div className="mt-4 grid gap-6 lg:grid-cols-1 mb-15">
+      <HeroSection />
+
+      <div className="mt-8">
+        <MarketTicker />
+      </div>
+
+      <div id="converter" className="mt-8 grid gap-6 lg:grid-cols-1 mb-15">
         {/* Converter */}
         <div className="lg:col-span-2">
           <ConverterCard
@@ -63,7 +68,7 @@ export default function Home() {
       
 
       {/* Chart */}
-      <div className="mt-6">
+      <div id="chart" className="mt-6">
         <RateHistoryChart
           from={from}
           to={to}
