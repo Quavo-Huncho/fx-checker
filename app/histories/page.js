@@ -10,7 +10,7 @@ export default function HistoryPage() {
   
 
   return (
-    <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-blue-800 mt-20 mx-15 p-6 shadow-sm">
+    <div className="mx-auto max-w-7xl px-4 py-10 text-slate-900 dark:bg-slate-950 dark:text-white">
 
       <ConversionHistory
         history={history}
