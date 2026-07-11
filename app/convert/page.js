@@ -15,7 +15,7 @@ export default function FavoritePage() {
   const { history, addHistory, removeHistory, clearHistory, } = useHistory();
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-blue-800 mt-20 mx-15 p-6 shadow-sm">
+    <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-blue-800 mt-20 mx-15 p-6 shadow-sm">
 
       <div className="lg:col-span-2">
         <ConverterCard

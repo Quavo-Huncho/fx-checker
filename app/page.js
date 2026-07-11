@@ -29,7 +29,7 @@ export default function Home() {
   } = useHistory();
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-10">
+    <main className="mx-auto max-w-7xl px-4 py-10 text-slate-900 dark:bg-slate-950 dark:text-white">
 
       <HeroSection />
 

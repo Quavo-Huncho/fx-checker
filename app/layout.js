@@ -7,10 +7,12 @@ export const metadata = {
   description: "Live currency exchange dashboard",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}) {
   return (
     <html lang="en">
-      <body className="bg-zinc-300 text-white min-h-screen flex flex-col">
+      <body className="min-h-screen bg-zinc-300 text-slate-900 flex flex-col transition-colors duration-300 dark:bg-slate-950 dark:text-white">
         <Navbar />
 
         <main className="flex-1">

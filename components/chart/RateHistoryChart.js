@@ -1,101 +1,115 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function useRateHistory(
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
+
+import useRateHistory from "@/hooks/useRateHistory";
+
+export default function RateHistoryChart({
   from,
   to,
-  range
-) {
-  const [data, setData] = useState([]);
+}) {
+  const [range, setRange] =
+    useState("1M");
 
-  useEffect(() => {
-    async function fetchHistory() {
-      try {
-        const today = new Date();
-        const startDate = new Date();
+  const {
+    data,
+    loading,
+  } = useRateHistory(
+    from,
+    to,
+    range
+  );
 
-        switch (range) {
-          case "1W":
-            startDate.setDate(
-              today.getDate() - 7
-            );
-            break;
+  const ranges = [
+    "1W",
+    "1M",
+    "3M",
+    "1Y",
+    "5Y",
+  ];
 
-          case "1M":
-            startDate.setMonth(
-              today.getMonth() - 1
-            );
-            break;
+  return (
+    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+      <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 className="text-xl font-bold text-slate-900">
+            📈 Exchange Rate History
+          </h2>
 
-          case "3M":
-            startDate.setMonth(
-              today.getMonth() - 3
-            );
-            break;
+          <p className="text-sm text-slate-500">
+            {from} → {to}
+          </p>
+        </div>
 
-          case "1Y":
-            startDate.setFullYear(
-              today.getFullYear() - 1
-            );
-            break;
+        <div className="flex flex-wrap gap-2">
+          {ranges.map((item) => (
+            <button
+              key={item}
+              onClick={() =>
+                setRange(item)
+              }
+              className={`rounded-xl px-4 py-2 text-sm font-medium transition cursor-pointer ${
+                range === item
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+              }`}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
 
-          case "5Y":
-            startDate.setFullYear(
-              today.getFullYear() - 5
-            );
-            break;
+      {loading ? (
+        <div className="flex h-80 items-center justify-center">
+          <p>
+            Loading chart...
+          </p>
+        </div>
+      ) : data.length === 0 ? (
+        <div className="flex h-80 items-center justify-center">
+          <p>
+            No chart data available.
+          </p>
+        </div>
+      ) : (
+        <div className="h-80">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
+            <LineChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
 
-          default:
-            startDate.setMonth(
-              today.getMonth() - 1
-            );
-        }
+              <XAxis
+                dataKey="date"
+              />
 
-        const start =
-          startDate
-            .toISOString()
-            .split("T")[0];
+              <YAxis />
 
-        const end =
-          today
-            .toISOString()
-            .split("T")[0];
+              <Tooltip />
 
-        const response = await fetch(
-          `https://api.frankfurter.app/${start}..${end}?from=${from}&to=${to}`
-        );
-
-        const result =
-          await response.json();
-
-        if (!result.rates) {
-          setData([]);
-          return;
-        }
-
-        const chartData = Object.entries(
-          result.rates
-        ).map(([date, rates]) => ({
-          date:
-            range === "1W" ||
-            range === "1M"
-              ? date.slice(5)
-              : date,
-          rate: rates[to],
-        }));
-
-        setData(chartData);
-      } catch (error) {
-        console.error(
-          "Chart Error:",
-          error
-        );
-      }
-    }
-
-    fetchHistory();
-  }, [from, to, range]);
-
-  return data;
+              <Line
+                type="monotone"
+                dataKey="rate"
+                stroke="#2563eb"
+                strokeWidth={3}
+                dot={false}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+    </div>
+  );
 }

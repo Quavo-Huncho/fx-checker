@@ -54,10 +54,10 @@ export default function MarketTicker() {
   }, []);
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-r from-white to-slate-50 py-9  mb-15 shadow-sm">
-      <h3 className="text-lg font-semibold ml-7">
+    <div className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm">
+      <h2 className="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
         ⭐ Markets
-      </h3>
+      </h2>
       <div className="flex animate-marquee gap-10 whitespace-nowrap">
         {[...markets, ...markets].map(
           (item, index) => (
@@ -65,7 +65,7 @@ export default function MarketTicker() {
               key={`${item.pair}-${index}`}
               className="flex items-center gap-2 text-lg font-medium"
             >
-              <span className="text-slate-700">
+              <span className="text-slate-700 dark:text-white">
                 {item.pair}
               </span>
 

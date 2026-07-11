@@ -2,7 +2,7 @@
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-500 via-green-600 to-emerald-700 px-6 py-16 text-white shadow-xl md:px-12 md:py-24">
+    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-500 via-green-600 to-emerald-700 px-6 py-16 text-white shadow-xl transition-all duration-300 dark:from-slate-900 dark:via-slate-800 dark:to-slate-950 md:px-12 md:py-24">
       {/* Background Blur Effects */}
       <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
       <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-blue-400/20 blur-3xl"></div>
@@ -23,7 +23,7 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg text-green-50">
+          <p className="mt-6 max-w-xl text-lg text-green-50 dark:text-slate-300">
             FX Checker helps you convert currencies,
             track market movements, monitor exchange
             rate history, and save your favorite
@@ -50,8 +50,8 @@ export default function HeroSection() {
 
         {/* Right Content */}
         <div className="grid gap-4">
-          <div className="rounded-3xl bg-white/10 p-6 backdrop-blur">
-            <p className="text-sm text-green-100">
+          <div className="rounded-3xl bg-white/10 dark:bg-slate-800/70 p-6 backdrop-blur">
+            <p className="text-sm text-green-100 dark:text-slate-400">
               Popular Pair
             </p>
 
@@ -59,28 +59,28 @@ export default function HeroSection() {
               EUR → USD
             </h3>
 
-            <p className="mt-2 text-green-100">
+            <p className="mt-2 text-green-100 dark:text-slate-400">
               Monitor real-time currency movements.
             </p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-3xl bg-white/10 p-6 backdrop-blur">
+            <div className="rounded-3xl bg-white/10 dark:bg-slate-800/70 p-6 backdrop-blur">
               <h3 className="text-3xl font-bold">
                 30+
               </h3>
 
-              <p className="text-green-100">
+              <p className="text-green-100 dark:text-slate-400">
                 Supported Currencies
               </p>
             </div>
 
-            <div className="rounded-3xl bg-white/10 p-6 backdrop-blur">
+            <div className="rounded-3xl bg-white/10 dark:bg-slate-800/70 p-6 backdrop-blur">
               <h3 className="text-3xl font-bold">
                 Live
               </h3>
 
-              <p className="text-green-100">
+              <p className="text-green-100 dark:text-slate-400">
                 ECB Exchange Data
               </p>
             </div>

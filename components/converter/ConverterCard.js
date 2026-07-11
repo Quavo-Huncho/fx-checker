@@ -85,15 +85,15 @@ export default function ConverterCard({
 
   if (currencies.length === 0) {
     return (
-      <div className="rounded-3xl border border-slate-200 bg-white p-8">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-8">
         Loading currencies...
       </div>
     );
   }
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-      <h2 className="mb-6 text-2xl font-bold text-slate-900">
+    <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-8 shadow-sm">
+      <h2 className="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
         Currency Converter
       </h2>
 
@@ -141,8 +141,8 @@ export default function ConverterCard({
           />
         </div>
 
-        <div className="rounded-2xl bg-slate-50 p-5">
-          <p className="text-sm text-slate-500">
+        <div className="rounded-2xl bg-slate-50 dark:bg-slate-800 p-5">
+          <p className="text-sm text-slate-900 dark:text-white">
             Converted Amount
           </p>
 
@@ -151,7 +151,7 @@ export default function ConverterCard({
               Loading...
             </p>
           ) : (
-            <h3 className="mt-2 text-3xl font-bold text-slate-900">
+            <h3 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">
               {result !== null
                 ? `${Number(
                     result

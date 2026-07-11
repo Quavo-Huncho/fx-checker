@@ -8,15 +8,15 @@ export default function ConversionHistory({ history, removeHistory, clearHistory
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
           📝 Conversion History
         </h2>
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="text-sm font-medium text-blue-600 hover:text-blue-800 cursor-pointer"
+          className="text-sm font-medium text-blue-600 hover:text-blue-800 dark:hover:text-blue-400 cursor-pointer"
         >
           {isOpen ? "Hide" : "Show"}
         </button>
@@ -25,7 +25,7 @@ export default function ConversionHistory({ history, removeHistory, clearHistory
       {isOpen && (
         <div className="mt-4">
           {history.length === 0 ? (
-            <p className="text-slate-500">
+            <p className="text-slate-500 dark:text-slate-400">
               No conversions yet.
             </p>
           ) : (
@@ -34,14 +34,14 @@ export default function ConversionHistory({ history, removeHistory, clearHistory
                 {history.map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between rounded-xl bg-slate-50 p-3"
+                    className="flex items-center justify-between rounded-xl bg-slate-50 dark:bg-slate-800 p-3"
                   >
                     <div>
                       <p className="font-medium">
                         {item.amount} {item.from}
                       </p>
 
-                      <p className="text-sm text-slate-500">
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
                         {item.result} {item.to}
                       </p>
                     </div>
@@ -50,7 +50,7 @@ export default function ConversionHistory({ history, removeHistory, clearHistory
                       onClick={() =>
                         removeHistory(index)
                       }
-                      className="text-sm text-red-500 hover:text-red-700 cursor-pointer"
+                      className="text-sm text-red-500 hover:text-red-700 dark:hover:text-red-400 cursor-pointer"
                     >
                       Remove
                     </button>
@@ -60,7 +60,7 @@ export default function ConversionHistory({ history, removeHistory, clearHistory
 
               <button
                 onClick={clearHistory}
-                className="mt-4 rounded-xl bg-red-100 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-800 cursor-pointer"
+                className="mt-4 rounded-xl bg-red-100 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-800 dark:hover:text-red-400 cursor-pointer"
               >
                 Clear All
               </button>

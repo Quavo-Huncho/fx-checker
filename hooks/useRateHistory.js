@@ -4,23 +4,66 @@ import { useEffect, useState } from "react";
 
 export default function useRateHistory(
   from,
-  to
+  to,
+  range = "1M"
 ) {
   const [data, setData] = useState([]);
+  const [loading, setLoading] =
+    useState(true);
 
   useEffect(() => {
     async function fetchHistory() {
+      if (!from || !to) {
+        setData([]);
+        setLoading(false);
+        return;
+      }
+
       try {
+        setLoading(true);
+
         const today = new Date();
+        const startDate = new Date();
 
-        const oneMonthAgo = new Date();
+        switch (range) {
+          case "1W":
+            startDate.setDate(
+              today.getDate() - 7
+            );
+            break;
 
-        oneMonthAgo.setMonth(
-          today.getMonth() - 1
-        );
+          case "1M":
+            startDate.setMonth(
+              today.getMonth() - 1
+            );
+            break;
+
+          case "3M":
+            startDate.setMonth(
+              today.getMonth() - 3
+            );
+            break;
+
+          case "1Y":
+            startDate.setFullYear(
+              today.getFullYear() - 1
+            );
+            break;
+
+          case "5Y":
+            startDate.setFullYear(
+              today.getFullYear() - 5
+            );
+            break;
+
+          default:
+            startDate.setMonth(
+              today.getMonth() - 1
+            );
+        }
 
         const start =
-          oneMonthAgo
+          startDate
             .toISOString()
             .split("T")[0];
 
@@ -29,33 +72,73 @@ export default function useRateHistory(
             .toISOString()
             .split("T")[0];
 
-        const response =
-          await fetch(
-            `https://api.frankfurter.app/${start}..${end}?from=${from}&to=${to}`
-          );
+        const url = `/api/history?from=${from}` + `&to=${to}` + `&start=${start}` + `&end=${end}`;
+        
+        console.log(
+          "History URL:",
+          url
+        );
 
-        const data =
+        const response =
+          await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(
+            `HTTP ${response.status}`
+          );
+        }
+
+        const result =
           await response.json();
+
+        console.log(
+          "History Result:",
+          result
+        );
+
+        if (
+          !result ||
+          !result.rates
+        ) {
+          setData([]);
+          return;
+        }
 
         const chartData =
           Object.entries(
-            data.rates
+            result.rates
           ).map(
-            ([date, rate]) => ({
-              date,
+            ([date, rates]) => ({
+              date:
+                range === "1W" ||
+                range === "1M"
+                  ? date.slice(5)
+                  : date,
               rate:
-                rate[to],
+                Number(
+                  rates[to]
+                ),
             })
           );
 
         setData(chartData);
       } catch (error) {
-        console.error(error);
+        console.error(
+          "History Error:",
+          error
+        );
+
+        setData([]);
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchHistory();
-  }, [from, to]);
+  }, [from, to, range]);
 
-  return data;
+  return {
+    data,
+    loading,
+  };
 }
