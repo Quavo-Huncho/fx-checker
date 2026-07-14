@@ -1,38 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "@/lib/auth";
+import { resetPassword } from "@/lib/auth";
 
-export default function SigninPage() {
+export default function ForgotPasswordPage() {
   const [email, setEmail] =
-    useState("");
-
-  const [password, setPassword] =
     useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     const { error } =
-      await signIn(
-        email,
-        password
-      );
+      await resetPassword(email);
 
     if (error) {
       alert(error.message);
       return;
     }
 
-    window.location.href =
-      "/dashboard";
+    alert(
+      "Password reset email sent."
+    );
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-lg">
         <h1 className="mb-6 text-center text-3xl font-bold text-slate-900">
-          Sign In
+          Reset Password
         </h1>
 
         <form
@@ -48,26 +43,10 @@ export default function SigninPage() {
             }
           />
 
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full rounded-xl border p-3"
-            onChange={(e) =>
-              setPassword(e.target.value)
-            }
-          />
-
           <button className="w-full rounded-xl bg-blue-600 py-3 text-white">
-            Sign In
+            Send Reset Link
           </button>
         </form>
-
-        <a
-          href="/forgot-password"
-          className="mt-4 block text-center text-blue-600"
-        >
-          Forgot Password?
-        </a>
       </div>
     </div>
   );

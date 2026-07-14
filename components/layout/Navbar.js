@@ -29,6 +29,14 @@ export default function Navbar() {
       name: "Favorites",
       href: "/favorite",
     },
+    {
+      name: "SignUp",
+      href: "/signup",
+    },
+    {
+      name: "SignIn",
+      href: "/signin",
+    },
   ];
 
   return (
