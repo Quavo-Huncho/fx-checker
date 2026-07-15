@@ -26,7 +26,7 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="mx-auto mt-10 max-w-md rounded-3xl bg-white p-8 shadow">
+    <div className="mx-auto mt-10 max-w-md rounded-3xl bg-white dark:bg-slate-950 dark:text-white p-8 shadow">
       <h1 className="mb-6 text-3xl font-bold">
         Reset Password
       </h1>
@@ -46,7 +46,7 @@ export default function ResetPassword() {
           className="mb-4 w-full rounded-xl border p-3"
         />
 
-        <button className="w-full rounded-xl bg-green-600 py-3 text-white">
+        <button className="w-full rounded-xl bg-green-600 py-3 text-white dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-600">
           Send Reset Link
         </button>
       </form>

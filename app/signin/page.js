@@ -30,8 +30,8 @@ export default function SigninPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
-      <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-lg">
-        <h1 className="mb-6 text-center text-3xl font-bold text-slate-900">
+      <div className="w-full max-w-md rounded-3xl bg-white dark:bg-slate-950 dark:text-white p-8 shadow-lg">
+        <h1 className="mb-6 text-center text-3xl font-bold text-slate-900 dark:text-white">
           Sign In
         </h1>
 
@@ -57,14 +57,14 @@ export default function SigninPage() {
             }
           />
 
-          <button className="w-full rounded-xl bg-blue-600 py-3 text-white">
+          <button className="w-full rounded-xl bg-blue-600 py-3 text-white dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600">
             Sign In
           </button>
         </form>
 
         <a
           href="/forgot-password"
-          className="mt-4 block text-center text-blue-600"
+          className="mt-4 block text-center text-blue-600 dark:text-blue-500 hover:underline"
         >
           Forgot Password?
         </a>

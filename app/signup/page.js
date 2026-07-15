@@ -48,8 +48,8 @@ export default function SignupPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
-      <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-lg">
-        <h1 className="mb-6 text-center text-3xl font-bold text-slate-900">
+      <div className="w-full max-w-md rounded-3xl bg-white dark:bg-slate-950 dark:text-white p-8 shadow-lg">
+        <h1 className="mb-6 text-center text-3xl font-bold text-slate-900 dark:text-white">
           Create Account
         </h1>
 
@@ -63,7 +63,7 @@ export default function SignupPage() {
             onChange={(e) =>
               setFirstName(e.target.value)
             }
-            className="w-full rounded-xl border p-3"
+            className="w-full rounded-xl border p-3 dark:bg-slate-800 dark:text-white"
           />
 
           <input
@@ -72,7 +72,7 @@ export default function SignupPage() {
             onChange={(e) =>
               setLastName(e.target.value)
             }
-            className="w-full rounded-xl border p-3"
+            className="w-full rounded-xl border p-3 dark:bg-slate-800 dark:text-white"
           />
 
           <input
@@ -82,7 +82,7 @@ export default function SignupPage() {
             onChange={(e) =>
               setEmail(e.target.value)
             }
-            className="w-full rounded-xl border p-3"
+            className="w-full rounded-xl border p-3 dark:bg-slate-800 dark:text-white"
           />
 
           <input
@@ -92,13 +92,13 @@ export default function SignupPage() {
             onChange={(e) =>
               setPassword(e.target.value)
             }
-            className="w-full rounded-xl border p-3"
+            className="w-full rounded-xl border p-3 dark:bg-slate-800 dark:text-white"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-xl bg-blue-600 py-3 text-white"
+            className="w-full rounded-xl bg-blue-600 py-3 text-white dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600"
           >
             {loading
               ? "Creating..."
