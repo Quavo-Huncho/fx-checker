@@ -2,30 +2,41 @@
 
 import { useState } from "react";
 import { signIn } from "@/lib/auth";
+import { useRouter } from "next/navigation";
 
 export default function SigninPage() {
-  const [email, setEmail] =
-    useState("");
-
-  const [password, setPassword] =
-    useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    const { error } =
-      await signIn(
-        email,
-        password
+    try {
+      const { data, error } =
+        await signIn(
+          email,
+          password
+        );
+      console.log(
+        "SIGNIN DATA:",
+        data
       );
-
-    if (error) {
-      alert(error.message);
-      return;
+      console.log(
+        "SIGNIN ERROR:",
+        error
+      );
+      if (error) {
+        alert(error.message);
+        return;
+      }
+      router.push("/dashboard");
+    } catch (err) {
+      console.error(
+        "CATCH ERROR:",
+        err
+      );
+      alert(err.message);
     }
-
-    window.location.href =
-      "/dashboard";
   }
 
   return (

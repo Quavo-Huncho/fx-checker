@@ -3,19 +3,39 @@
 import { useState } from "react";
 import Link from "next/link";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
+import { useRouter } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
+import { signOut } from "@/lib/auth";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] =
-    useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
+  const router = useRouter();
+
+  const { user } = useAuth();
+
+  const guestLinks = [{
+      name: "Home",
+      href: "/",
+    },
+    {
+      name: "Sign Up",
+      href: "/signup",
+    },
+    {
+      name: "Sign In",
+      href: "/signin",
+    },
+  ];
+
+  const userLinks = [
     {
       name: "Home",
       href: "/",
     },
     {
-      name: "Converter",
-      href: "/convert",
+      name: "Dashboard",
+      href: "/dashboard",
     },
     {
       name: "Markets",
@@ -29,15 +49,15 @@ export default function Navbar() {
       name: "Favorites",
       href: "/favorite",
     },
-    {
-      name: "SignUp",
-      href: "/signup",
-    },
-    {
-      name: "SignIn",
-      href: "/signin",
-    },
   ];
+
+  const navLinks = user ? userLinks : guestLinks;
+
+  async function handleLogout() {
+    await signOut();
+
+    router.push("/");
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-green-600 bg-green-500 shadow-sm transition-colors dark:border-slate-700 dark:bg-slate-900">
@@ -69,6 +89,15 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {user && (
+              <button
+                onClick={handleLogout}
+                className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+              >
+                Logout
+              </button>
+            )}
           </nav>
 
           <DarkModeToggle />
@@ -105,6 +134,15 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {user && (
+              <button
+                onClick={handleLogout}
+                className="mt-3 rounded-lg bg-red-500 px-4 py-3 text-white"
+              >
+                Logout
+              </button>
+            )}
           </div>
         </nav>
       )}

@@ -1,27 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import {
-  signUp,
-  signInWithGoogle,
-} from "@/lib/auth";
+import { signUp, signInWithGoogle,} from "@/lib/auth";
 import Link from "next/link"; 
 
 export default function SignupPage() {
-  const [firstName, setFirstName] =
-    useState("");
+  const [firstName, setFirstName] = useState("");
 
-  const [lastName, setLastName] =
-    useState("");
+  const [lastName, setLastName] = useState("");
 
-  const [email, setEmail] =
-    useState("");
+  const [email, setEmail] = useState("");
 
-  const [password, setPassword] =
-    useState("");
+  const [password, setPassword] = useState("");
 
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,14 +21,11 @@ export default function SignupPage() {
     setLoading(true);
 
     const { data, error } = await signUp({
-  firstName,
-  lastName,
-  email,
-  password,
-});
-
-console.log("SIGNUP DATA:", data);
-console.log("SIGNUP ERROR:", error);
+      firstName,
+      lastName,
+      email,
+      password,
+    });
 
     setLoading(false);
 

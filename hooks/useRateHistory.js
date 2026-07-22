@@ -104,22 +104,22 @@ export default function useRateHistory(
           return;
         }
 
-        const chartData =
-          Object.entries(
-            result.rates
-          ).map(
-            ([date, rates]) => ({
-              date:
-                range === "1W" ||
-                range === "1M"
-                  ? date.slice(5)
-                  : date,
-              rate:
-                Number(
-                  rates[to]
-                ),
-            })
-          );
+        const chartData = Object.entries(
+          result.rates
+        )
+          .filter(
+            ([, rates]) =>
+              rates &&
+              typeof rates[to] === "number"
+          )
+          .map(([date, rates]) => ({
+            date:
+              range === "1W" ||
+              range === "1M"
+                ? date.slice(5)
+                : date,
+            rate: rates[to],
+          }));
 
         setData(chartData);
       } catch (error) {
