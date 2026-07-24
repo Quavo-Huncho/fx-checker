@@ -102,8 +102,16 @@ export default function SignupPage() {
         <p className="text-center pt-4">Or</p>
 
         <button
-          onClick={signInWithGoogle}
-          className="mt-4 w-full rounded-xl border py-3 mt-4"
+          type="button"
+          onClick={async () => {
+            const { error } =
+              await signInWithGoogle();
+
+            if (error) {
+              alert(error.message);
+            }
+          }}
+          className="mt-4 w-full rounded-xl border py-3 hover:bg-slate-100 dark:hover:bg-slate-800"
         >
           Continue with Google
         </button>

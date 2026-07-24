@@ -39,14 +39,22 @@ export default function Home() {
   } = useAuth();
 
   useEffect(() => {
-    if (
-      !loading &&
-      !user
-    ) {
-      router.push("/signin");
+    if (!loading && !user) {
+      router.replace("/signin");
     }
-  }, [user, loading]);
+  }, [user, loading, router]);
 
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
   if (loading)
     return (
       <p>Loading...</p>

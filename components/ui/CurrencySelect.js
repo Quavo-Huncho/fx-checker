@@ -124,7 +124,7 @@ export default function CurrencySelect({
         onClick={() =>
           setIsOpen(!isOpen)
         }
-        className="flex w-full items-center justify-between rounded-2xl border border-slate-300 bg-white dark:bg-slate-900 p-4 text-left transition hover:border-blue-400 cursor-pointer"
+        className="flex w-full items-center justify-between rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 text-left text-slate-900 dark:text-white transition hover:border-blue-400 cursor-pointer"
       >
         <div className="flex items-center gap-3">
           <ReactCountryFlag
@@ -163,7 +163,7 @@ export default function CurrencySelect({
                 e.target.value
               )
             }
-            className="w-full border-b border-slate-200 dark:border-slate-700 p-3 outline-none focus:border-blue-500"
+            className="w-full border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white p-3 outline-none focus:border-blue-500"
           />
 
           {/* Results */}
@@ -192,7 +192,13 @@ export default function CurrencySelect({
                         ""
                       );
                     }}
-                    className="flex w-full items-center justify-between px-4 py-3 text-left transition hover:bg-slate-100 cursor-pointer"
+                    className={`flex w-full items-center justify-between px-4 py-3 text-left transition cursor-pointer
+                    ${
+                      selectedCurrency === currency.iso_code
+                        ? "bg-blue-100 dark:bg-blue-900/30"
+                        : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                    }
+                    text-slate-900 dark:text-white`}
                   >
                     <div className="flex items-center gap-3">
                       <ReactCountryFlag
@@ -215,7 +221,7 @@ export default function CurrencySelect({
                       </span>
                     </div>
 
-                    <span className="text-sm text-slate-500">
+                    <span className="text-sm text-slate-500 dark:text-slate-400">
                       {
                         currency.name
                       }
@@ -224,7 +230,7 @@ export default function CurrencySelect({
                 )
               )
             ) : (
-              <div className="p-4 text-center text-sm text-slate-500">
+              <div className="p-4 text-center text-sm text-slate-500 dark:text-slate-400">
                 No currency found
               </div>
             )}

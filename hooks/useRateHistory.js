@@ -8,8 +8,7 @@ export default function useRateHistory(
   range = "1M"
 ) {
   const [data, setData] = useState([]);
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchHistory() {
@@ -72,8 +71,12 @@ export default function useRateHistory(
             .toISOString()
             .split("T")[0];
 
-        const url = `/api/history?from=${from}` + `&to=${to}` + `&start=${start}` + `&end=${end}`;
-        
+        const url =
+          `/api/history?from=${from}` +
+          `&to=${to}` +
+          `&start=${start}` +
+          `&end=${end}`;
+
         console.log(
           "History URL:",
           url
@@ -81,6 +84,11 @@ export default function useRateHistory(
 
         const response =
           await fetch(url);
+
+        console.log(
+          "Response Status:",
+          response.status
+        );
 
         if (!response.ok) {
           throw new Error(
@@ -92,34 +100,65 @@ export default function useRateHistory(
           await response.json();
 
         console.log(
-          "History Result:",
+          "Full API Result:",
           result
+        );
+
+        console.log(
+          "Rates Object:",
+          result.rates
         );
 
         if (
           !result ||
           !result.rates
         ) {
+          console.log(
+            "No rates returned"
+          );
+
           setData([]);
           return;
         }
 
-        const chartData = Object.entries(
-          result.rates
-        )
-          .filter(
-            ([, rates]) =>
-              rates &&
-              typeof rates[to] === "number"
-          )
-          .map(([date, rates]) => ({
-            date:
-              range === "1W" ||
-              range === "1M"
-                ? date.slice(5)
-                : date,
-            rate: rates[to],
-          }));
+        const entries =
+          Object.entries(
+            result.rates
+          );
+
+        console.log(
+          "Entries:",
+          entries
+        );
+
+        const chartData =
+          entries.map(
+            ([date, rateObj]) => {
+              console.log(
+                "Date:",
+                date,
+                "RateObj:",
+                rateObj
+              );
+
+              return {
+                date:
+                  range === "1W" ||
+                  range === "1M"
+                    ? date.slice(5)
+                    : date,
+                rate:
+                  Number(
+                    rateObj[to]
+                  ),
+              };
+            }
+          );
+
+        console.log(
+          "Chart Data:",
+          chartData
+        );
 
         setData(chartData);
       } catch (error) {

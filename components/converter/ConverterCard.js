@@ -20,8 +20,7 @@ export default function ConverterCard({
   const [currencies, setCurrencies] =
     useState([]);
 
-  const [amount, setAmount] =
-    useState(1);
+  const [amount, setAmount] = useState("");
 
   const [result, setResult] =
     useState(null);
@@ -46,7 +45,10 @@ export default function ConverterCard({
 
 
   async function handleConvert() {
-    if (!amount || amount <= 0) {
+    if (
+      amount === "" ||
+      Number(amount) <= 0
+    ) {
       setResult(null);
       return;
     }
@@ -56,7 +58,7 @@ export default function ConverterCard({
 
       const convertedAmount =
         await convertCurrency(
-          amount,
+          Number(amount),
           from,
           to
         );
@@ -100,16 +102,12 @@ export default function ConverterCard({
       <div className="space-y-5">
         <input
           type="number"
-          min="1"
           value={amount}
           onChange={(e) =>
-            setAmount(
-              Number(
-                e.target.value
-              )
-            )
+            setAmount(e.target.value)
           }
-          className="w-full rounded-2xl border border-slate-300 p-4 text-lg outline-none focus:border-blue-500"
+          placeholder="Enter amount"
+          className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 text-lg text-slate-900 dark:text-white outline-none focus:border-blue-500"
         />
 
         <div className="grid gap-4 md:grid-cols-[1fr_auto_auto_1fr]">
@@ -121,7 +119,7 @@ export default function ConverterCard({
 
           <button
             onClick={swapCurrencies}
-            className="cursor-pointer rounded-2xl border border-slate-300 px-4 py-2 font-semibold transition hover:bg-slate-100"
+            className="cursor-pointer rounded-2xl border border-slate-300 px-4 py-2 font-semibold transition hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
           >
             ⇄
           </button>
@@ -129,7 +127,7 @@ export default function ConverterCard({
           <button
             onClick={handleConvert}
             disabled={loading}
-            className="cursor-pointer rounded-2xl bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-slate-400"
+            className="cursor-pointer rounded-2xl bg-blue-500 px-4 py-2 font-semibold text-white dark transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-slate-400 dark:disabled:bg-slate-600"
           >
             {loading ? "Converting..." : "Convert"}
           </button>
